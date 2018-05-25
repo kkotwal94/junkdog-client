@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { hydrate } from 'react-dom';
-import fetch from 'cross-fetch';
-import { BrowserRouter } from 'react-router-dom';
-import { HttpLink } from 'apollo-link-http';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import red from '@material-ui/core/colors/red';
-import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import gql from 'graphql-tag';
-import createRoutes from './routes';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import registerServiceWorker from './registerServiceWorker';
+import React, { Component } from "react";
+import { hydrate } from "react-dom";
+import fetch from "cross-fetch";
+import { BrowserRouter } from "react-router-dom";
+import { HttpLink } from "apollo-link-http";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import indigo from "@material-ui/core/colors/indigo";
+import red from "@material-ui/core/colors/red";
+import { ApolloProvider } from "react-apollo";
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import gql from "graphql-tag";
+import createRoutes from "./routes";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import registerServiceWorker from "./registerServiceWorker";
 
 class Main extends Component {
   render() {
@@ -23,14 +23,14 @@ class Main extends Component {
 const theme = createMuiTheme({
   palette: {
     primary: indigo,
-    secondary: red,
-  },
+    secondary: red
+  }
 });
 
 const routes = createRoutes();
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({ uri: 'localhost:3001/graphql', fetch: fetch }),
+  link: new HttpLink({ uri: "http://localhost:3001/graphql", fetch: fetch })
   // here we're initializing the cache with the data from the server's cache
 });
 
@@ -45,19 +45,19 @@ client
           name
         }
       }
-    `,
+    `
   })
   .then(result => console.log(result));
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 hydrate(
-    <ApolloProvider client={client}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline>
-          <Main />
-        </CssBaseline>
-      </MuiThemeProvider>
-    </ApolloProvider>,
-    document.getElementById('root')
-  );
+  <ApolloProvider client={client}>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline>
+        <Main />
+      </CssBaseline>
+    </MuiThemeProvider>
+  </ApolloProvider>,
+  document.getElementById("root")
+);
 registerServiceWorker();
