@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  client:
+    container_name: Junkdog-Client
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./public:/usr/src/app/public
+    command: npm run start
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
